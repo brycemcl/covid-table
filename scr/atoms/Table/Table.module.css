@@ -1,0 +1,18 @@
+.table,
+.th,
+.td {
+  --border: 1px solid black;
+  --padding: 0.5rem;
+}
+.table {
+  border-spacing: 0;
+  border-top: var(--border);
+  border-left: var(--border);
+}
+.th,
+.td {
+  margin: 0;
+  padding: var(--padding);
+  border-bottom: var(--border);
+  border-right: var(--border);
+}
