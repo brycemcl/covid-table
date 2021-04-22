@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "out",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "nextServer"
+      }
+    ]
+  },
+  "functions": {
+    "source": "firebaseBuild",
+    "runtime": "nodejs12"
+  }
+}
