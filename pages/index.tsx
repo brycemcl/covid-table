@@ -1,7 +1,7 @@
 import { default as axios } from 'axios'
 import Head from 'next/head'
 import Table from '../scr/atoms/Table'
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   let columns
   let data
   {
@@ -12,13 +12,17 @@ export async function getStaticProps(context) {
       .then((res) => res.data)
     const lineData = csv.split('\n').map((line) => JSON.parse(`[${line}]`))
     const headers = lineData[0]
-    data = lineData.slice(1).map((line) => {
-      const row = {}
-      line.forEach((cell, index) => {
-        row[headers[index]] = cell
+    data = lineData
+      .slice(1)
+      .map((line, index) => {
+        const row = {}
+        line.forEach((cell, index) => {
+          row[headers[index]] = cell
+        })
+        return { id: index, ...row }
       })
-      return row
-    })
+      .reverse()
+      .slice(1)
     columns = headers.map((item) => {
       return {
         Header: item,
@@ -34,11 +38,10 @@ const page = ({ columns, data }) => {
   return (
     <>
       <Head>
-        <title>Change me</title>
+        <title>B.C. Covid data</title>
         <link rel='icon' href='/favicon.ico' />
         <meta name='description' content='' />
       </Head>
-      {/* {typeof window !== 'undefined' && <Table columns={columns} data={data} />} */}
       <Table columns={columns} data={data} />
     </>
   )

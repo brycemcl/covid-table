@@ -9,7 +9,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "export": "next build && next export",
-    "deploy": "npm run export && mkdir firebaseBuild && cp server.js firebaseBuild/index.js && cp server.js firebaseBuild/index.js && cp package*.json firebaseBuild && cp -r .next firebaseBuild && cp -r public firebaseBuild && cross-env NODE_ENV=production firebase deploy --only functions,hosting ; rm -fr firebaseBuild",
+    "deploy": "npm run export ; mkdir firebaseBuild && cp server.js firebaseBuild/index.js && cp server.js firebaseBuild/index.js && cp package*.json firebaseBuild && cp -r .next firebaseBuild && cp -r public firebaseBuild && cross-env NODE_ENV=production firebase deploy --only functions,hosting ; rm -fr firebaseBuild",
     "test": "jest --watch"
   },
   "dependencies": {
@@ -19,7 +19,9 @@
     "normalize.css": "^8.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-table": "^7.6.3"
+    "react-table": "^7.6.3",
+    "react-virtual": "^2.7.1",
+    "react-window": "^1.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

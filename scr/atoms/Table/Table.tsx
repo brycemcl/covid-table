@@ -37,7 +37,7 @@ const Table = ({ columns: columnsProps, data: dataProps }) => {
               {row.cells.map((cell) => {
                 return (
                   <td {...cell.getCellProps()} className={styles.td}>
-                    {cell.render('Cell')}
+                    {cell.value}
                   </td>
                 )
               })}
