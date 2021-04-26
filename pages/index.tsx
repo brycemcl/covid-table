@@ -1,40 +1,20 @@
+import { useQuery } from 'react-query'
 import { default as axios } from 'axios'
 import Head from 'next/head'
 import Table from '../scr/atoms/Table'
-export async function getServerSideProps(context) {
-  let columns
-  let data
-  {
-    const csv = await axios
-      .get(
-        `http://www.bccdc.ca/Health-Info-Site/Documents/BCCDC_COVID19_Dashboard_Case_Details.csv`,
-      )
-      .then((res) => res.data)
-    const lineData = csv.split('\n').map((line) => JSON.parse(`[${line}]`))
-    const headers = lineData[0]
-    data = lineData
-      .slice(1)
-      .map((line, index) => {
-        const row = {}
-        line.forEach((cell, index) => {
-          row[headers[index]] = cell
-        })
-        return { id: index, ...row }
-      })
-      .reverse()
-      .slice(1)
-    columns = headers.map((item) => {
-      return {
-        Header: item,
-        accessor: item,
-      }
-    })
-  }
-  return {
-    props: { columns, data },
-  }
+const getData = async () => {
+  return await axios.get(`/api/cases`).then((res) => res.data)
 }
-const page = ({ columns, data }) => {
+const page = () => {
+  const { isLoading, isError, data: fetchedData } = useQuery('data', getData)
+  if (isLoading) {
+    return <div>Loading</div>
+  }
+
+  if (isError) {
+    return <div>Loading Error</div>
+  }
+  const { columns, data } = fetchedData
   return (
     <>
       <Head>

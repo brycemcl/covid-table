@@ -1,8 +1,14 @@
-import "../styles/globals.css";
-import "normalize.css";
+import { QueryClient, QueryClientProvider } from 'react-query'
+import '../styles/globals.css'
+import 'normalize.css'
+const queryClient = new QueryClient()
 
 function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  )
 }
 
-export default App;
+export default App

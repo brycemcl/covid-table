@@ -19,6 +19,7 @@
     "normalize.css": "^8.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-query": "^3.13.12",
     "react-table": "^7.6.3",
     "react-virtual": "^2.7.1",
     "react-window": "^1.8.6"
